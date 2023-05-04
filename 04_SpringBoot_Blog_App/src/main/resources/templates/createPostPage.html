@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Ashok IT- Registration</title>
+<!-- MDB icon -->
+<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+
+<!-- MDB -->
+<link rel="stylesheet" href="css/bootstrap-login-form.min.css" />
+
+<!-- CKeditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+
+</head>
+<body>
+
+	<!-- Start your project here-->
+
+
+	<!--Nav bar start-->
+
+
+	<!--Nav bar end-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="dashboard">Ashok IT | Blog App</a>
+			<button class="navbar-toggler" type="button"
+				data-mdb-toggle="collapse" data-mdb-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="dashboard">Posts</a>
+					<a class="nav-link" href="newPost">New Post</a> <a class="nav-link"
+						href="comments">Comments</a> <a class="nav-link" href="./">Logout</a>
+				</div>
+			</div>
+
+			<form class="d-flex input-group w-auto">
+				<input type="search" class="form-control rounded"
+					placeholder="Search" aria-label="Search"
+					aria-describedby="search-addon" /> <span
+					class="input-group-text text-white border-0" id="search-addon">
+					<i class="fas fa-search"></i>
+				</span>
+			</form>
+
+		</div>
+	</nav>
+
+
+
+	<div class="container">
+		<div class="row pb-4 pt-4">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<div class="card">
+					<div class="card-header text-center bg-info">
+						<h3>Create Post</h3>
+					</div>
+					<div class="card-body">
+					
+						<form th:action="@{/newPost}" method="POST" th:object="${createPost}">
+						
+						
+						
+							<label for="title">Title</label><br>
+							 <input type="text"
+								id="title" class="form-control" placeholder="Enter post title" th:field="*{title}"><br>
+								<label for="description">Short
+								Description</label><br>
+							<textarea name="description" id="description" class="form-control" placeholder="Enter post short description" th:field="*{description}"></textarea><br>
+							
+							<label for="content">Content</label><br> 
+							<textarea name="content" id="content" class="form-control" placeholder="Enter Post content" th:field="*{content}"></textarea><br><br>
+                            
+                           <button type="submit" class="btn btn-primary">Post&nbsp;</button>	
+					</form>
+					
+					</div>
+					<div class="card-footer">
+					    <p th:text="${succMsg}" class="text-success"></p>
+						<p th:text="${errMsg}" class="text-danger"></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<footer class="bg-dark text-center text-white">
+		<!-- Grid container -->
+		<div class="container p-4 pb-0"></div>
+
+		<!-- Copyright -->
+		<div class="text-center p-3"
+			style="background-color: rgba(0, 0, 0, 0.2);">
+			© 2020 Copyright: <a class="text-white"
+				href="https://mdbootstrap.com/">Ashok IT.com</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+
+	<!-- MDB -->
+	<script type="text/javascript" src="js/mdb.min.js"></script>
+	<!-- CKEditor -->
+	<script>
+        ClassicEditor
+            .create( document.querySelector( '#content' ) )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+</body>
+</html>
