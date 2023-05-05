@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ashokit.binding.DashboardData;
 import com.ashokit.binding.LoginForm;
 import com.ashokit.binding.RegistrationForm;
 import com.ashokit.service.IUserService;
@@ -26,6 +25,7 @@ public class UserController {
 	@PostMapping("/registration")
 	public String userRegistrationProcess(@ModelAttribute("registrationFrm")RegistrationForm registrationFrm,RedirectAttributes attr) {
 		System.out.println("UserController.userRegistrationProcess()"+registrationFrm);
+	
 		boolean status = userService.saveUserRegistration(registrationFrm);
 		if(status)
 			attr.addFlashAttribute("succMsg","User Registered successfully");
@@ -53,6 +53,7 @@ public class UserController {
 		}
 		return "redirect:login";
 	}
+	
 	
 	
 }

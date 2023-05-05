@@ -7,4 +7,5 @@ public interface IUserService {
 	
 	public boolean saveUserRegistration(RegistrationForm registrationFrm);
 	public boolean login(LoginForm loginFrm);
+	
 }

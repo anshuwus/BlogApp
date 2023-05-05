@@ -60,6 +60,6 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + postId + ", title=" + title + ", description=" + description + ", content=" + content
-				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn +"User Id: "+user.getUserId()+ "]";
+				+ ", createdOn=" + createdOn + ", updatedOn=" + updatedOn +"User Id: "+ "]";
 	}
 }

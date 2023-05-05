@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>Ashok IT- BlogApp</title>
+<!-- MDB icon -->
+<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+
+<!-- MDB -->
+<link rel="stylesheet" href="css/bootstrap-login-form.min.css" />
+
+</head>
+<body>
+
+	<!--Nav bar end-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="./">Ashok IT | Blog App</a>
+			<button class="navbar-toggler" type="button"
+				data-mdb-toggle="collapse" data-mdb-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="./">All Posts</a> <a
+						class="nav-link" href="registration">Register</a> <a class="nav-link"
+						href="login">Login</a>
+
+				</div>
+			</div>
+
+		</div>
+	</nav>
+	<!--Nav bar start-->
+
+	<!-- Start your project here-->
+    <div class="container pt-3">
+      <div class="container pt-5">
+           <div class="card ">
+           <div class="card-header">
+           
+             <h2 th:text="${post.title}"></h2>
+              
+           </div>
+           <div class="card-body">
+              <h4 th:text="${post.description}"></h4><hr>
+              <b>Introduction:</b>
+              <p th:text="${post.content}"></p>
+           </div>
+       </div><!-- card end --><br>
+       
+       <!-- Check wheater list is empty or not if it is empty then dont display any comments -->
+       <div th:if="${!#lists.isEmpty(list)}">
+           <h3>Comments:</h3>
+       
+           <div class="card" style="width:25rem" th:each="data : ${list}">
+               <div class="card-header">
+                   <p><b>Name:</b>&nbsp;<b th:text="${data.name}"></b></p>
+                   <p><b>Date:</b>&nbsp;<b th:text="${data.createdOn}"></b></p>
+                   <p th:text="${data.content}"></p>
+               </div>
+            </div><!-- card end --><br>
+        </div>
+           
+           
+           
+           
+            <div class="card" style="width:45rem">
+                 <div class="card-header">
+                       <h3>Leave a comment</h3>
+                 </div>
+                 <div class="card-body">
+                      <form th:action="@{/comment}" method="POST" th:object="${comment}">
+						    
+						    <div th:if="${post.postId!=null}">
+					               <input type="hidden" name="postId" th:value="${post.postId}"/>
+							 </div>  
+						    
+							<label for="name">Name</label><br>
+							<input type="text" id="name" class="form-control" placeholder="Enter name" th:field="*{name}"><br>
+								
+							<label for="email">Email-Id</label><br>
+							<input type="text" id="email" class="form-control" placeholder="Enter email" th:field="*{email}" ><br>
+							
+							<label for="content">Comment</label><br>
+							<textarea name="content" id="content" class="form-control" placeholder="Enter comment"  th:field="*{content}"></textarea><br>
+							
+							<button type="submit" class="btn btn-success">Submit&nbsp;</button>	
+				   	 </form>
+                 
+                 </div>
+            </div>
+      </div>
+    
+    </div>
+
+
+
+
+	<br>
+	<br>
+
+
+	<!-- End your project here-->
+
+	<!-- MDB -->
+	<script type="text/javascript" src="js/mdb.min.js"></script>
+	<!-- Custom scripts -->
+	<script type="text/javascript"></script>
+</body>
+
+
+
+
+<footer class="bg-dark text-center text-white">
+	<!-- Grid container -->
+	<div class="container p-4 pb-0"></div>
+
+	<!-- Copyright -->
+	<div class="text-center p-3"
+		style="background-color: rgba(0, 0, 0, 0.2);">
+		© 2020 Copyright: <a class="text-white"
+			href="https://mdbootstrap.com/">Ashok IT.com</a>
+	</div>
+	<!-- Copyright -->
+</footer>
+
+
+
+</html>

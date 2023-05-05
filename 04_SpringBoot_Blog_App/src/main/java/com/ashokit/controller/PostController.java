@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ashokit.binding.CreatePost;
-import com.ashokit.binding.DashboardData;
+import com.ashokit.entity.Comment;
 import com.ashokit.entity.Post;
 import com.ashokit.service.IPostService;
 
@@ -27,7 +27,7 @@ public class PostController {
 	private HttpSession session;
 	
 	@GetMapping("/dashboard")
-	public String dashboard(@ModelAttribute("dashboard")DashboardData dashboard,Model model) {
+	public String dashboard(Model model) {
 		System.out.println("PostController.dashboard()");
 		Integer userId = (Integer) session.getAttribute("userId");
 		if(userId!=null) {
@@ -84,9 +84,33 @@ public class PostController {
 		return "redirect:edit";
 	}
 	
+	@GetMapping("/deletePost")
+	public String deletePost(@RequestParam("postId")Integer postId) {
+		service.deletePost(postId);
+		return "redirect:dashboard";
+	}
+	
 	@GetMapping("/comments")
-	public String postComments() {
+	public String postComments(Model model) {
+		System.out.println("PostController.postComments()");
+		Integer userId=(Integer)session.getAttribute("userId");
+		List<Comment> list = service.getAllCommentsByUserId(userId);
+		list.forEach(System.out::println);
+		model.addAttribute("list", list);
 		return "commentsPage";
 	}
 	
+	@GetMapping("/deleteComment")
+	public String deleteComment(@RequestParam("id")Integer commentId) {
+		service.deleteComment(commentId);
+		return "redirect:comments";
+		
+	}
+	
+	@GetMapping("/searchPost")
+	public String searchBlog(@RequestParam("data")String data,Model model) {
+		List<Post> searchBlog = service.searchBlog(data);
+		model.addAttribute("list", searchBlog);
+		return "filteredPost";
+	}
 }
