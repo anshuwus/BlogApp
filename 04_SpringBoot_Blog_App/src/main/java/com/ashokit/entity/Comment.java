@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +22,8 @@ import lombok.Setter;
 @Table(name="COMMENT_TAB")
 @Setter
 @Getter
+@SQLDelete(sql="UPDATE COMMENT_TAB SET STATUS='INACTIVE' WHERE id=?")
+@Where(clause="STATUS <> 'INACTIVE'")
 public class Comment {
 
 	@Id
@@ -38,7 +42,7 @@ public class Comment {
 	@JoinColumn(name = "post_id")
 	private Post post;
 	
-	
+	private String status="ACTIVE";
 	
 	//toString()
 	@Override

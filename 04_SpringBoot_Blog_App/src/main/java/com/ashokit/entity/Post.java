@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +26,8 @@ import lombok.Setter;
 @Table(name="POST_TAB")
 @Setter
 @Getter
+@SQLDelete(sql="UPDATE POST_TAB SET STATUS='INACTIVE' WHERE post_id=?")
+@Where(clause="STATUS <> 'INACTIVE'")
 public class Post {
 
 	@Id
@@ -41,6 +45,7 @@ public class Post {
 	@UpdateTimestamp
 	private LocalDate updatedOn;
 	
+	private String status="ACTIVE";
 	//establish Many to one relationship with User Tab because many post belongs to one user
 	@ManyToOne
 	@JoinColumn(name = "user_id")
